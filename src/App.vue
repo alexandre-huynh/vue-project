@@ -1,47 +1,45 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref } from 'vue';
+import { useToast } from "primevue/usetoast";
+
+const text = ref();
+const toast = useToast();
+const greet = () => {
+  toast.add({severity:"success", summary: "PrimeVue", detail: text.value})
+}
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div class="grid grid-nogutter surface-section text-800">
+    <div class="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center ">
+        <section>
+            <span class="block text-6xl font-bold mb-1">Text here</span>
+            <div class="text-6xl text-primary font-bold mb-3">More text here</div>
+            <p class="mt-0 mb-4 text-700 line-height-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            
+            <Button label="Learn More" type="button" class="mr-3 p-button-raised"></Button>
+            <Button label="Live Demo" type="button" class="p-button-outlined"></Button>
+        </section>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <div class="col-12 md:col-6 overflow-hidden">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Ash_Tree_-_geograph.org.uk_-_590710.jpg" alt="Image" class="md:ml-auto block md:h-full" style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%)" />
+    </div>
+</div>
+  <div class="container">
+    <Toast></Toast>
+    <span class="p-float-label p-input-filled" style="margin-right:1rem">
+      <InputText id="txt" type="text" v-model="text" />
+      <label for="txt">Text</label>
+    </span>
+    <Button label="Greet" @click="greet" icon="pi pi-user"></Button>
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 </style>
